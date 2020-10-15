@@ -30,9 +30,12 @@ app.get('/posts/:blogPost', function(req, res){
 })
 
 app.get('/', function(req, res){
-  res.render('home', {startingContent : homeStartingContent, sentPosts: posts});
-
-})
+  
+    res.render('home', {
+      startingContent : homeStartingContent, 
+      posts : posts 
+    });
+ });
 
 app.get('/about', function(req, res){
   res.render('about', {aboutContent : aboutContent, });
