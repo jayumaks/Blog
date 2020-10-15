@@ -1,10 +1,19 @@
 <%- include('partials/header'); -%>
 <h1>Home</h1>
+
+<% sentPosts.forEach(function(post){ %>
+    <div style="display: flex; flex-direction: column; justify-content: space-between;">
+        <h4><%= post.title %></h4>
+        <p><%= post.body %></p>
+    </div>
+  
+<% }) %>
+<!-- 
 <% for(var i=0; i<sentPosts.length; i++){ %>
-    <div style="display:flex; flex-direction:column; margin-bottom:50px; justify-content: space-between;">
+    console.log(sent)
         <h4><%= sentPosts[i].title %></h4>
          <p><%= sentPosts[i].body %></p>
     </div>
    
-<% } %>
+<% } %> -->
 <%- include('partials/footer'); -%>
