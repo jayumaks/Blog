@@ -14,6 +14,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 
+let posts = [];
+
 app.get('/', function(req, res){
   res.render('home', {startingContent : homeStartingContent});
 })
@@ -31,15 +33,17 @@ app.get('/compose', function(req, res){
 })
 
 app.post('/compose',function(req, res){
-  const title = req.body.postTitle;
-  const body = req.body.postBody;
-
-  const postDetails = {
-    postTitle: title, 
-    postBody : body,
+  const post = {
+     title : req.body.postTitle,
+     body : req.body.postBody
   }
-  console.log("Post title is :", postDetails.postTitle);
-  console.log("Post body is : ", postDetails.postBody);
+
+  if(post){
+    posts.push(post);
+    res.redirect('/');
+  }
+
+  console.log("Here are the available posts: ",posts);
 });
 
 app.listen(3000, function() {
