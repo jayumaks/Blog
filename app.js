@@ -1,5 +1,3 @@
-//jshint esversion:6
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -21,11 +19,11 @@ app.get('/', function(req, res){
 })
 
 app.get('/about', function(req, res){
-  res.render('about', {aboutContent : aboutContent})
+  res.render('about', {aboutContent : aboutContent});
 })
 
 app.get('/contact', function(req, res){
-  res.render('contact', {contactContent : contactContent})
+  res.render('contact', {contactContent : contactContent});
 })
 
 
