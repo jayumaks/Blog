@@ -17,11 +17,12 @@ app.use(express.static("public"));
 let posts = [];
 
 app.get('/', function(req, res){
-  res.render('home', {startingContent : homeStartingContent});
+  res.render('home', {startingContent : homeStartingContent, sentPosts: posts});
+
 })
 
 app.get('/about', function(req, res){
-  res.render('about', {aboutContent : aboutContent});
+  res.render('about', {aboutContent : aboutContent, });
 })
 
 app.get('/contact', function(req, res){
@@ -38,12 +39,13 @@ app.post('/compose',function(req, res){
      body : req.body.postBody
   }
 
+  //Only push to posts if post exist
   if(post){
     posts.push(post);
     res.redirect('/');
   }
 
-  console.log("Here are the available posts: ",posts);
+
 });
 
 app.listen(3000, function() {
