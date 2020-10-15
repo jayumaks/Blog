@@ -16,6 +16,10 @@ app.use(express.static("public"));
 
 let posts = [];
 
+app.get('/posts/:postTitle' ,function(req, res){
+  console.log(req.params.postTitle);
+})
+
 app.get('/', function(req, res){
   res.render('home', {startingContent : homeStartingContent, sentPosts: posts});
 
