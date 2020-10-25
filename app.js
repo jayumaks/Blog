@@ -35,16 +35,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 //No longer need thhis : Database in use ;let posts = [];
+app.get("/posts/:postId", function (req, res) {
+  const requestedPostId = req.params.postId;
 
-app.get("/posts/:blogPost", function (req, res) {
-  const requestedTitle = _.lowerCase(req.params.blogPost);
-
-  posts.forEach(function (post) {
-    const storedTitle = _.lowerCase(post.title);
-
-    if (storedTitle === requestedTitle) {
-      res.render("post", { title: post.title, body: post.body });
-    }
+  Post.findOne({ _id: requestedPostId }, function (err, post) {
+    res.render("post", {
+      title: post.title,
+      content: post.content,
+    });
   });
 });
 
@@ -72,16 +70,12 @@ app.get("/compose", function (req, res) {
 app.post("/compose", function (req, res) {
   const post = new Post({
     title: req.body.postTitle,
-
     content: req.body.postBody,
   });
 
-  //Only save posts and redirect if no errors
   post.save(function (err) {
     if (!err) {
       res.redirect("/");
-    } else {
-      console.log(err);
     }
   });
 });
