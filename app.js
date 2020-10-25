@@ -50,9 +50,9 @@ app.get("/posts/:blogPost", function (req, res) {
 
 app.get("/", function (req, res) {
   Post.find({}, function (err, posts) {
-    res.render("home"{
-      startingContent : homeStartingContent,
-      posts: posts
+    res.render("home", {
+      startingContent: homeStartingContent,
+      posts: posts,
     });
   });
 });
@@ -76,13 +76,14 @@ app.post("/compose", function (req, res) {
     content: req.body.postBody,
   });
 
-  post.save();
-
-  //Only push to posts if post exist
-  // if (post) {
-  //   posts.push(post);
-  //   res.redirect("/");
-  // }
+  //Only save posts and redirect if no errors
+  post.save(function (err) {
+    if (!err) {
+      res.redirect("/");
+    } else {
+      console.log(err);
+    }
+  });
 });
 
 app.listen(port, function () {
