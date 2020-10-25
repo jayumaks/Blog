@@ -11,7 +11,6 @@ mongoose.connect("mongodb://localhost:27017/blogDB", {
 
 const postSchema = {
   title: String,
-
   content: String,
 };
 
@@ -29,12 +28,11 @@ let port = process.env.PORT;
 if (port == null || port == "") {
   port = 8000;
 }
-app.set("view engine", "ejs");
 
+app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-//No longer need thhis : Database in use ;let posts = [];
 app.get("/posts/:postId", function (req, res) {
   const requestedPostId = req.params.postId;
 
